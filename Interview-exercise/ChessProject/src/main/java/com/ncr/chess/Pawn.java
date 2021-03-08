@@ -1,8 +1,13 @@
 package com.ncr.chess;
 
-import static com.ncr.chess.ChessBoard.*;
+import lombok.Data;
 
-public class Pawn {
+import static com.ncr.chess.ChessBoard.getPieces;
+import static com.ncr.chess.ChessBoard.MAX_BOARD_HEIGHT;
+import static com.ncr.chess.ChessBoard.MAX_BOARD_WIDTH;
+
+@Data
+public class Pawn extends Pieces{
 
     private ChessBoard chessBoard;
     private int xCoordinate;
@@ -13,41 +18,16 @@ public class Pawn {
         this.pieceColor = pieceColor;
     }
 
-    public ChessBoard getChessBoard() {
-        return chessBoard;
-    }
-
-    public void setChessBoard(ChessBoard chessBoard) {
-        this.chessBoard =  chessBoard;
-    }
-
-    public int getXCoordinate() {
-        return xCoordinate;
-    }
-
-    public void setXCoordinate(int value) {
-        this.xCoordinate = value;
-    }
-
-    public int getYCoordinate() {
-        return yCoordinate;
-    }
-
-    public void setYCoordinate(int value) {
-        this.yCoordinate = value;
-    }
-
-    public PieceColor getPieceColor() {
-        return this.pieceColor;
-    }
-
-    private void setPieceColor(PieceColor value) {
-        pieceColor = value;
-    }
-
+    /**
+     * This method will move the piece to new X and Y coordinates position given if it is a valid move
+     * @param movementType input movement type MOVE/CAPTURE
+     * @param newX input new X coordinates
+     * @param newY input new Y coordinates
+     */
     public void move(MovementType movementType, int newX, int newY) {
         if(movementType.equals(MovementType.MOVE)){
-            if(newX >= 0 && newX < MAX_BOARD_WIDTH && newY >= 0 && newY < MAX_BOARD_HEIGHT && !(getPieces(newX,newY) instanceof Pawn)) {
+            if(newX >= 0 && newX < MAX_BOARD_WIDTH && newY >= 0 && newY < MAX_BOARD_HEIGHT
+                && !(getPieces(newX,newY) instanceof Pawn)) {
                 if(PieceColor.BLACK.equals(getPieceColor()) &&  newX == getXCoordinate() &&  newY == getYCoordinate() - 1 ){
                     setXCoordinate(newX);
                     setYCoordinate(newY);
