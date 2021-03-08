@@ -1,6 +1,8 @@
 package com.ncr.chess;
 
 import lombok.Data;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static com.ncr.chess.ChessBoard.getPieces;
 import static com.ncr.chess.ChessBoard.MAX_BOARD_HEIGHT;
@@ -8,6 +10,8 @@ import static com.ncr.chess.ChessBoard.MAX_BOARD_WIDTH;
 
 @Data
 public class Pawn extends Pieces{
+
+    private static final Logger logger = LogManager.getLogger(Pawn.class);
 
     private ChessBoard chessBoard;
     private int xCoordinate;
@@ -29,9 +33,11 @@ public class Pawn extends Pieces{
             if(newX >= 0 && newX < MAX_BOARD_WIDTH && newY >= 0 && newY < MAX_BOARD_HEIGHT
                 && !(getPieces(newX,newY) instanceof Pawn)) {
                 if(PieceColor.BLACK.equals(getPieceColor()) &&  newX == getXCoordinate() &&  newY == getYCoordinate() - 1 ){
+                    logger.info("Moved pawn to X " + xCoordinate + "and Y " + yCoordinate + " position and piece color " +getPieceColor());
                     setXCoordinate(newX);
                     setYCoordinate(newY);
                 } else if(PieceColor.WHITE.equals(getPieceColor()) &&  newX == getXCoordinate() &&  newY == getYCoordinate() + 1) {
+                    logger.info("Moved pawn to X " + xCoordinate + "and Y " + yCoordinate + " position and piece color " +getPieceColor());
                     setXCoordinate(newX);
                     setYCoordinate(newY);
                 }

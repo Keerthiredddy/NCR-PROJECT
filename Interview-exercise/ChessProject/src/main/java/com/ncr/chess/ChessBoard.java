@@ -34,14 +34,17 @@ public class ChessBoard {
     public void addPiece(Pawn pawn, int xCoordinate, int yCoordinate, PieceColor pieceColor) {
         if (this.isLegalBoardPosition(xCoordinate, yCoordinate)) {
             if (this.getPieces(xCoordinate, yCoordinate) instanceof Pawn) {
+                logger.info("X " + xCoordinate + "and Y " + yCoordinate + " coordinates is already having pawn");
                 pawn.setXCoordinate(-1);
                 pawn.setYCoordinate(-1);
             } else {
+                logger.info("Added pawn to X " + xCoordinate + "and Y " + yCoordinate + " position");
                 this.setPieces(xCoordinate, yCoordinate, pawn);
                 pawn.setXCoordinate(xCoordinate);
                 pawn.setYCoordinate(yCoordinate);
             }
         } else {
+            logger.info("X " + xCoordinate + "and Y " + yCoordinate + " positions are not valid");
             pawn.setXCoordinate(-1);
             pawn.setYCoordinate(-1);
         }
@@ -57,8 +60,10 @@ public class ChessBoard {
     public boolean isLegalBoardPosition(int xCoordinate, int yCoordinate) {
         if (xCoordinate >= 0 && xCoordinate < MAX_BOARD_WIDTH
             && yCoordinate >= 0 && yCoordinate < MAX_BOARD_HEIGHT) {
+            logger.info("X " + xCoordinate + "and Y " + yCoordinate + " positions are valid");
             return true;
         }
+        logger.info("X " + xCoordinate + "and Y " + yCoordinate + " positions are not valid");
         return false;
     }
 }
